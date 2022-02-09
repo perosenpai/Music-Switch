@@ -1,0 +1,331 @@
+#dugme {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}#deskripcija{
+    background-color: #f5f5f5;
+    position:relative;
+    left:0;
+    right:0;
+    top: 0;
+    text-align:center;
+    font-family: Georgia;
+    font-size: 13px;
+}
+
+#desno p{
+            margin-top: 15px;
+            margin-left: 50px;
+        }
+        #desno h2{
+            margin-left: 10px;
+            border-bottom:1px solid #2958a5
+        }
+        #desno h3{
+            margin-left: 30px;
+        }
+#header{
+    width: 100%;
+    background-color: white;
+    padding: 0;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+#glavni{
+    margin-top:10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    background-color: transparent;  
+    height:auto;
+    left:50%;
+    transform: translateX(-50%);
+    position:relative;
+    display: inline-block;
+    overflow: hidden;
+    min-height:100%
+
+}
+body{
+    background-image: url("http://www.fortplainfreelibrary.org/wp-content/uploads/2016/04/Dark-Blue-Background-Wallpapers.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding:0px;
+    margin:0px;
+}
+html {
+    padding:0px;
+}
+#glavni-meni{
+    background-color: #181818;
+    padding: 0;
+    border: none;
+    left: 0;
+    right: 0;
+    position: relative;
+    overflow: hidden;
+}
+nav{
+    background-color: #181818;
+    font-family: Georgia;
+    text-align: center;
+}
+
+nav > *{
+    position: relative;
+    margin-bottom: 10px;    
+    margin-left: 20px;
+
+}
+
+nav ul {
+    margin: 0;  
+    padding: 0;
+    list-style: none;   
+    float: left;
+
+}
+
+nav li{
+    display: inline-block;
+    margin: 0 35px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+nav a{
+    color:#fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+nav a:hover{
+    color:#2958a5;
+}
+.korpa{
+    float:right;
+    display: inline-block;
+    padding-top: 2px;
+
+}
+.link{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: top;
+    padding: 0px;
+}
+.linkovi {
+    float: right;
+    display: inline-block;
+    position: relative;
+    margin: 0 15px;
+}
+
+.link-boja{
+    color:#000;
+    text-decoration: none;
+    font-size: 14px;
+}
+.link-boja:hover{
+    color:blue;
+}
+
+#meni {
+    clear: both;
+    height: 28px;
+    width: 100%;
+    z-index: 98;
+    display: inline-block;
+    padding-left: 15px;
+}
+
+#pomocni-drzac{
+    position: relative;
+    left: 50%;
+    margin:0px;
+    width: 1000px;
+    height: auto;
+    transform: translateX(-50%);
+    overflow: auto;
+}
+.separator {
+    color:#FFF;
+}	
+.drzac{
+    background-color:white;
+
+    position: relative;
+    left: 50%;
+    margin:0px;
+    width: 1000px;
+    height: auto;
+    transform: translateX(-50%);
+    overflow: auto;
+}
+
+.musicswitch{
+    background-image: url("musicswitch.jpg");
+}
+
+#levo {
+    width: 20% ;
+    height: 100%;
+    float: left;
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    background-color:#f5f5f5;
+    border: 1px solid #ccc!important;
+    font-size: 1em;
+    padding: 5px;
+    box-shadow: 0px 0px 10px black;
+}
+
+ul.nota a {
+    color:#000;
+    text-decoration: none;
+    font-size: 17px;
+}
+ul.nota a:hover{
+    color:blue;
+}
+ul.nota li{
+    padding-bottom: 7px;
+}
+#kontakt{
+    border-top: 1px solid #ddd;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+}
+.pozivni-broj{
+    text-decoration: none;
+}
+.pozivni-broj:hover{
+    text-decoration: underline;
+}
+.e-mail{
+    text-decoration: none;
+}
+
+.e-mail:hover{
+    text-decoration: underline;
+}
+#radno-vreme{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.levi-blok .blok-naslov {
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.levi-blok .kontakt .icon{
+
+    display: inline-block;
+    width: 20px;
+    color: #999;
+}
+
+.levi-blok .blok-sadrzaj p{
+    margin-left: 15px;
+}
+
+ul.nota{
+    list-style-type: none;
+
+}
+
+ul.nota li:before {
+    content: '';
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-size: 10px;
+    background-image: url("https://thelogo.shop/wp-content/uploads/2016/12/05-Electric-Note.png");
+    background-repeat: no-repeat;
+    margin-right: 5px;
+
+}
+#image{
+    width: 600px;
+    height: 300px;
+    padding-left: 80px;
+    padding-top: 30px;
+}
+#desno {
+    width: 75% ;
+    height: 100%;
+    float: right;
+    min-height: 700px;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 1%;
+    background: #fff;
+    color: #181818;
+    border: 1px solid #ccc!important;
+    font-size: 1em;
+    padding: 5px;
+    display: block;
+    box-shadow: 0px 0px 10px black;
+    overflow: visible;
+}
+#dugme {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    float:right;
+}
+
+#footer {
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    font-size: 13px;
+    background: #fff;
+    opacity: 0.7;
+    height: auto;
+    margin-bottom: auto;
+    margin-top: 5px;
+
+}
+
+p{
+    margin:0;
+}
+#tabela_proizvod{
+    border: 1px solid #2958a5;
+    margin-left: 20px;
+}
+

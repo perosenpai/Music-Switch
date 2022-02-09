@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Prodaja muzickih instrumenata</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="artikal.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="aplikacija">
+        <div id="deskripcija">
+            <p> Prodavnica muzičkih instrumenata i opreme</p>
+        </div>
+        <div id="header">
+            <div class="drzac">
+                <ul clas="link">
+                    <li class="linkovi" v-if="kupac != ''"><a class="link-boja" href="LogoutServlet">Logout</a></li>
+                    <li class="linkovi" v-if="kupac != ''">Dobrodošli, {{kupac.ime}} {{kupac.prezime}}</li>
+                    <li class="linkovi" v-if="kupac == ''" class="linkovi"><a class="link-boja"
+                            href="registracija.html">Registrujte se</a></li>
+                    <li class="linkovi" v-if="kupac == ''" class="linkovi"><a class="link-boja"
+                            href="login.html">Login</a></li>
+                    <li class="linkovi"><a class="link-boja" href="korpa.html">Korpa</a></li>
+                    <a class="korpa" href="korpa.html"><img
+                            src="http://leppisbungalowit.fi/wp-content/uploads/2014/08/fa-shopping-basket.png"
+                            style="width:18px;height:14px;" alt="korpa"></a>
+                </ul>
+                <a class="musicswitch" href=""><img src="musicswitch.png" alt="Music Switch"></a>
+            </div>
+        </div>
+        <div id="glavni-meni">
+            <div id="pomocni-drzac">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">POČETNA</a></li><span class="separator">|</span>
+                        <li><a href="kontaktmusic.html">KONTAKT</a></li><span class="separator">|</span>
+                        <li><a href="naciniplacanja.html">NAČINI PLAĆANJA</a></li><span class="separator">|</span>
+                        <li><a href="onama.html">O NAMA</a></li><span class="separator">|</span>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div id="glavni">
+            <div id="levo">
+                <div id="kategorije" class="levi-blok">
+                    <div class="blok-naslov">KATEGORIJE:</div>
+                    <div id="ucitajZBaze">
+                        <ul id="meni" class="nota">
+                            <li v-for="k in kategorije"><a
+                                    v-bind:href="'./potkategorije.html?id_pot=' + k.id">{{k.naziv}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="kontakt" class="levi-blok">
+                    <div class="blok-naslov">KONTAKT</div>
+                    <div class="blok-sadrzaj">
+                        <ul class="adresa" style="list-style-type:none; padding-left:15px">
+                            <a class="lokacija"><img
+                                    src="https://banner2.kisspng.com/20180326/ire/kisspng-computer-icons-map-location-location-5ab9a0fb72f608.3456724315221148114709.jpg"
+                                    style="width:18px;height:14px;" alt="korpa"></a>
+                            <li>Music Switch</li>
+                            <li>Jug Bogdanova 2</li>
+                            <li>11000 Beograd, Srbija</li>
+                            <p>&nbsp</p>
+                            <li>Music Switch</li>
+                            <li>Jovana Subotića 4</li>
+                            <li>21010 Novi Sad, Srbija</li>
+
+                        </ul>
+                        <ul style="list-style-type:none; padding-left:15px">
+                            <a class="telefoni"><img src="http://www.clker.com/cliparts/f/D/Z/i/d/G/phone-logo-md.png"
+                                    style="width:18px;height:14px"></a>
+                            <li><a class="pozivni-broj" href="tel:+(311) 111555">+(381) 11 624-11-23</a></li>
+                            <li><a class="pozivni-broj" href="tel:+(021) 122367">+(381) 21 122-36-71</a></li>
+                        </ul>
+                        <ul style="list-style-type:none; padding-left:15px">
+                            <a class="mail"><img
+                                    src="http://pluspng.com/img-png/email-hd-png-best-hd-mail-icon-transparent-vector-file-free-1969.png"
+                                    style="width:18px;height:14px;" alt="korpa"></a>
+                            <li><a class="e-mail" href="mailto:musicswitchbg@gmail.com">musicswitchbg@gmail.com</a></li>
+                            <li><a class="e-mail" href="mailto:musicswitchns@gmail.com">musicswitchns@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="radno-vreme" class="levi-blok">
+                    <div class="blok-naslov">RADNO VREME</div>
+                    <div class="blok-sadrzaj">
+                        <p>ponedeljak - petak:<br>od 08 do 16 h</p>
+                        <p>subota:<br>od 08 do 14 h</p>
+                    </div>
+                </div>
+            </div>
+            <div id="desno">
+                <div id="unutrasnjost">
+                    <div v-for="a in artikal">
+                        <h2 id="odeljak">{{a.naziv}}</h2>
+                        <div id="klasa">
+                            <div id="slika_cena_dugme">
+                                <img id="image" v-bind:src="'data:image/png;base64, ' + a.slika" />
+                                <p id="cena">{{a.cena}} din.</p>
+                                <button class="dugme" v-if="kupac != ''" v-on:click="dodaj_u_korpu(a.id)">Dodaj u
+                                    korpu</button>
+                                <button class="dugme" v-if="kupac == ''" v-on:click="dodavanje">Dodaj u korpu</button>
+                            </div>
+                            <div id="div_opis">
+                                <p id="opis">{{a.opis}}</p>
+                            </div>
+                        </div>
+                        <div id="karakteristike" v-if="a.karakteristike.length > 0">
+                            <p style="font-weight:bold">Karakteristike:</p>
+                            <table id="tabela">
+                                <tbody v-for="karakteristika in a.karakteristike">
+                                    <tr>
+                                        <td>{{karakteristika.naziv}}</td>
+                                        <td>{{karakteristika.vrednost}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <p>Music Switch&nbsp|&nbspDaniel&nbspPetrik</p>
+        </div>
+    </div>
+    <script>
+        app = new Vue({
+            el: '#aplikacija',
+            created: function () {
+                var urlParams = new URLSearchParams(window.location.search);
+                var id_art = urlParams.get('id_art');
+
+
+                axios.get('app/artikal/' + id_art).then(function (result) {
+                    app.artikal = result.data;
+
+
+                });
+                axios.get('app/karakteristike').then(function (result) {
+                    app.karakteristike = result.data;
+
+
+                });
+                axios.get('app/kategorije').then(function (result) {
+                    app.kategorije = result.data;
+                });
+
+                axios.post('app/login/kupac').then(function (result) {
+                    app.kupac = result.data;
+                });
+
+            },
+            methods: {
+
+                dodaj_u_korpu: function (art_id) {
+
+
+                    axios.post('app/korpa/dodaj', {
+                        'art_id': art_id,
+                        'kor_id': app.kupac.id
+                    }).then(function (result) {
+                        alert('Artikal je uspesno ubačen u korpu. ')
+                    });
+
+                },
+                dodavanje: function () {
+
+                    alert('Morate se logovati za dodavanje u korpu!')
+                }
+            },
+            data: {
+                artikal: [],
+                kategorije: [],
+                kupac: [],
+            },
+
+        });
+
+    </script>
+
+</body>
+
+</html>

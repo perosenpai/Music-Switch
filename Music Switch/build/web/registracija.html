@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<head>
+    <title>Registracija</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        #content {
+            padding-left: 250px; 
+            padding-top: 50px;
+        }
+        #tabla{
+            border: 2px solid #2958a5;
+            margin-bottom: 10px;
+        }
+        #tabla tr {
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+        }
+        #tabla td{
+            padding: 5px 5px 5px 5px;
+        }
+        .unutar{
+            float: right;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <div id="aplikacija">
+        <div id="deskripcija">
+            <p> Prodavnica muzičkih instrumenata i opreme</p>
+        </div>
+        <div id="header">
+            <div class="drzac">
+                <ul clas="link">
+                    <li class="linkovi" v-if="kupac != ''" class="linkovi"><a class="link-boja" href="registracija.html">Registrujte se</a></li>
+                    <li class="linkovi" v-if="kupac == ''" class="linkovi"><a class="link-boja" href="login.html">Login</a></li>
+                    <li  class="linkovi" ><a class="link-boja" href="korpa.html">Korpa</a></li>
+                    <a class="korpa" href="korpa.html"><img src="http://leppisbungalowit.fi/wp-content/uploads/2014/08/fa-shopping-basket.png" style="width:18px;height:14px;" alt="korpa"></a>
+                </ul>
+                <a class="musicswitch"href="index.html"><img src="musicswitch.png" alt="Music Switch"></a>
+            </div>
+        </div>
+        <div id="glavni-meni">
+            <div id="pomocni-drzac">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">POČETNA</a></li><span class="separator">|</span>
+                        <li><a href="kontaktmusic.html">KONTAKT</a></li><span class="separator">|</span>
+                        <li><a href="naciniplacanja.html">NAČINI PLAĆANJA</a></li><span class="separator">|</span>
+                        <li><a href="onama.html">O NAMA</a></li><span class="separator">|</span>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div id="glavni">
+            <div id="levo"> 
+                <div id="kategorije" class="levi-blok">
+                    <div class="blok-naslov">KATEGORIJE:</div>
+                    <div class="unutrasnjost">
+                        <ul id="meni" class="nota">
+                            <li v-for="k in kategorije"><a v-bind:href="'./potkategorije.html?id_pot=' + k.id">{{k.naziv}}</a></li>
+                        </ul>
+                    </div>	
+                </div>	
+                <div id="kontakt" class="levi-blok">
+                    <div class="blok-naslov">KONTAKT</div>
+                    <div class="blok-sadrzaj">
+                        <ul class="adresa" style="list-style-type:none; padding-left:15px">
+                            <a class="lokacija"><img src="https://banner2.kisspng.com/20180326/ire/kisspng-computer-icons-map-location-location-5ab9a0fb72f608.3456724315221148114709.jpg" style="width:18px;height:14px" alt="korpa"></a>
+                            <li>Music Switch</li>
+                            <li>Jug Bogdanova 2</li>
+                            <li>11000 Beograd, Srbija</li>
+                            <p>&nbsp</p>
+                            <li>Music Switch</li>
+                            <li>Jovana Subotića 4</li>
+                            <li>21010 Novi Sad, Srbija</li>
+
+                        </ul>
+                        <ul style="list-style-type:none; padding-left:15px">
+                            <a class="telefoni"><img src="http://www.clker.com/cliparts/f/D/Z/i/d/G/phone-logo-md.png" style="width:18px;height:14px"></a>
+                            <li><a class="pozivni-broj" href="tel:+(311) 111555">+(381) 11 624-11-23</a></li>
+                            <li><a class="pozivni-broj" href="tel:+(021) 122367">+(381) 21 122-36-71</a></li>
+                        </ul>
+                        <ul style="list-style-type:none; padding-left:15px">
+                            <a class="mail"><img src="http://pluspng.com/img-png/email-hd-png-best-hd-mail-icon-transparent-vector-file-free-1969.png" style="width:18px;height:14px" alt="korpa"></a>
+                            <li><a class="e-mail" href="mailto:musicswitchbg@gmail.com">musicswitchbg@gmail.com</a></li>
+                            <li><a class="e-mail" href="mailto:musicswitchns@gmail.com">musicswitchns@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="radno-vreme" class="levi-blok">
+                    <div class="blok-naslov">RADNO VREME</div>
+                    <div class="blok-sadrzaj">
+                        <p>ponedeljak - petak:<br>od 08 do 16 h</p>
+                        <p>subota:<br>od 08 do 14 h</p>
+                    </div>
+                </div>
+            </div>
+            <div id="desno">
+                <h2 style="padding-left:15px;">Registrujte se:</h2>
+                <p style="padding-left:20px;">(Molimo Vas popunite sva polja!)</p>
+                <div id="content">
+                    <table id="tabla">
+                        <tr>
+                            <td>
+                                <label for='name' class="unutar">Ime:</label></td>
+                            <td>
+                                <input id='name' type='text' v-model='user.name'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='surname' class="unutar">Prezime:</label></td>
+                            <td>
+                                <input id='surname' type='text' v-model='user.surname'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='email' class="unutar">E-mail:</label></td>
+                            <td>
+                                <input id='email' type="email" v-model='user.email' class='emailClass' @blur="provera" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='pass' class="unutar">Šifra:</label></td>
+                            <td> 
+                                <input id='pass' type='password' v-model='user.pass'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='pass2' class="unutar">Potvrdi šifru:</label></td>
+                            <td>
+                                <input id='pass2' type='password' v-model='password2'/>
+                            </td>
+                        </tr>     
+                        <tr>
+                            <td>
+                                <label for='num' class="unutar">Telefon:</label></td>
+                            <td>
+                                <input id='num' type='text' v-model='user.num'/>
+                            </td>
+                        </tr>             
+                        <tr>
+                            <td>
+                                <label for='adress' class="unutar">Ulica i broj:</label>
+                            </td>
+                            <td>
+                                <input id='adress' type='text' v-model='user.adress'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='city' class="unutar">Grad</label>
+                            </td>
+                            <td>
+                                <select id='city' type='text' v-model='user.city' style="width: 173px; height: 20px; ">
+                                    <option v-for="g in gradovi" v-bind:value="g.id" >{{g.grad}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='postBroj' class="unutar">Poštanski broj:</label>
+                            </td>
+                            <td>
+                                <input id='postBroj' type='text' v-model='user.postBroj'/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for='state' class="unutar">Država:</label>
+                            </td>
+                            <td>
+                                <input id='state' type='text' v-model='user.state'/>
+
+                            </td>
+                        </tr>
+                    </table> 
+                    <input type='submit' value='Registruj se' @click='register'/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <p>Music Switch&nbsp|&nbspDaniel&nbspPetrik</p> 
+    </div>
+</div>
+<script>
+var app = new Vue({
+    el: '#aplikacija',
+    data: {
+        kategorije: [],
+        user: {},
+        password2: '',
+        emailClass: '',
+        gradovi: [],
+        kupac:''
+    },
+    created: function () {
+        axios.get('app/kategorije').then(function (result) {
+            app.kategorije = result.data;
+        });
+        axios.get('app/registracija/gradovi').then(function(result){
+            app.gradovi = result.data;
+        })
+    },
+    methods: {
+        register() {
+            if (this.user.pass === this.password2) {
+                axios.post("app/registracija", app.user)
+                        .then(function (response) {
+                            if (response.data === 'ok') {
+                                window.location = 'login.html'
+                            } else {
+                                app.emailClass = 'emailClass'
+                            }
+                        })
+
+            } else {
+                alert('Šifre se ne poklapaju')
+            }
+        },
+        provera() {
+            axios.post("app/registracija/provera", {email: app.user.email})
+                    .then(function (response) {
+                        if (response.data == 'ok') {
+                            app.emailClass = ''
+                        } else {
+                            app.emailClass = 'emailClass'
+                        }
+                    })
+        },
+        
+    },
+});
+</script>
+</body>
+</html>

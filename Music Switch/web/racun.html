@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+    <title>Račun</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="racun.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="aplikacija">
+        <div id="deskripcija">
+            <p> Prodavnica muzičkih instrumenata i opreme</p>
+        </div>
+        <div id="header">
+            <div class="drzac">
+                <ul clas="link">
+                    <li  class="linkovi" v-if="kupac != ''"><a class="link-boja" href="LogoutServlet">Logout</a></li>
+                    <li class="linkovi" v-if="kupac != ''">Dobrodošli, {{kupac.ime}} {{kupac.prezime}}</li>
+                    <li class="linkovi" v-if="kupac == ''" class="linkovi"><a class="link-boja" href="registracija.html">Registrujte se</a></li>
+                    <li class="linkovi" v-if="kupac == ''" class="linkovi"><a class="link-boja" href="login.html">Login</a></li>
+                    <li  class="linkovi" ><a class="link-boja" href="korpa.html">Korpa</a></li>
+                    <a class="korpa" href="korpa.html"><img src="http://leppisbungalowit.fi/wp-content/uploads/2014/08/fa-shopping-basket.png" style="width:18px;height:14px;" alt="korpa"></a>
+                </ul>
+                <a class="musicswitch"href="index.html"><img src="musicswitch.png" alt="Music Switch"></a>
+            </div>
+        </div>
+        <div id="glavni-meni">
+            <div id="pomocni-drzac">
+                <nav>
+                    <ul>
+                        <li><a href="index.html">POČETNA</a></li><span class="separator">|</span>
+                        <li><a href="kontaktmusic.html">KONTAKT</a></li><span class="separator">|</span>
+                        <li><a href="naciniplacanja.html">NAČINI PLAĆANJA</a></li><span class="separator">|</span>
+                        <li><a href="onama.html">O NAMA</a></li><span class="separator">|</span>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div id="glavni">
+            <div id="levo"> 
+                <div id="kategorije" class="levi-blok">
+                    <div class="blok-naslov">KATEGORIJE:</div>
+                    <div class="unutrasnjost">
+                        <ul id="meni" class="nota" >
+                            <li v-for="k in kategorije"><a v-bind:href="'./potkategorije.html?id_pot=' + k.id">{{k.naziv}}</a></li>
+                        </ul>
+                    </div>	
+                </div>	
+                <div id="kontakt" class="levi-blok">
+                    <div class="blok-naslov">KONTAKT</div>
+                    <div class="blok-sadrzaj">
+                        <ul class="adresa" style="list-style-type:none; padding-left:15px">
+                            <a class="lokacija"><img src="https://banner2.kisspng.com/20180326/ire/kisspng-computer-icons-map-location-location-5ab9a0fb72f608.3456724315221148114709.jpg" style="width:18px;height:14px" alt="korpa"></a>
+                            <li>Music Switch</li>
+                            <li>Jug Bogdanova 2</li>
+                            <li>11000 Beograd, Srbija</li>
+                            <p>&nbsp</p>
+                            <li>Music Switch</li>
+                            <li>Jovana Subotića 4</li>
+                            <li>21010 Novi Sad, Srbija</li>
+
+                        </ul>
+                        <ul style="list-style-type:none; padding-left:15px">
+                            <a class="telefoni"><img src="http://www.clker.com/cliparts/f/D/Z/i/d/G/phone-logo-md.png" style="width:18px;height:14px"></a>
+                            <li><a class="pozivni-broj" href="tel:+(311) 111555">+(381) 11 624-11-23</a></li>
+                            <li><a class="pozivni-broj" href="tel:+(021) 122367">+(381) 21 122-36-71</a></li>
+                        </ul>
+                        <ul style="list-style-type:none; padding-left:15px">
+                            <a class="mail"><img src="http://pluspng.com/img-png/email-hd-png-best-hd-mail-icon-transparent-vector-file-free-1969.png" style="width:18px;height:14px" alt="korpa"></a>
+                            <li><a class="e-mail" href="mailto:musicswitchbg@gmail.com">musicswitchbg@gmail.com</a></li>
+                            <li><a class="e-mail" href="mailto:musicswitchns@gmail.com">musicswitchns@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="radno-vreme" class="levi-blok">
+                    <div class="blok-naslov">RADNO VREME</div>
+                    <div class="blok-sadrzaj">
+                        <p>ponedeljak - petak:<br>od 08 do 16 h</p>
+                        <p>subota:<br>od 08 do 14 h</p>
+                    </div>
+                </div>
+            </div>
+            <div id="desno">
+                <h2>Račun</h2>
+                <p v-if="kupac == ''" style="padding-left: 20px;">Nemate pristup ovoj stranici.</p>
+                <div v-if="kupac != ''">
+                    <p>Prodato kupcu:</p> 
+                    <p style="padding-left: 30px; font-size: 25px; ">{{kupac.ime}} {{kupac.prezime}}</p>
+                    <p>Šalje se na adresu:</p>
+                    <p style="padding-left: 30px; font-size: 25px; border-bottom: 1px solid #2958a5 ;">{{kupac.adresa}}, {{kupac.grad}}, {{kupac.postanski}}</p>
+                    <p id="par1">Kupljeni proizvodi:</p>
+                    <div id='naruceniartikli' >
+                        <table  id="tabela_proizvod">
+                            <tbody v-for="artikal in korpa">
+                                <tr>
+                                    <td style="padding-left:30px; padding-right:20px"><strong>Artikal:</strong> {{artikal.naziv}}</td>
+                                    <td><strong>Kolicina:</strong> {{artikal.kolicina}}</td>
+                                    <td><strong>Cena:</strong> {{artikal.cena}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p id="cena">Ukupna cena:</p>
+                    <p style="padding-left: 30px; font-size: 25px;">{{total}}</p>
+                    <p style="padding-left:20px; padding-right:20px; border-top: 1px solid #2958a5;" >Očekujte pošiljku sledeća 24h. Hvala na poverenju.</p>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <p>Music Switch&nbsp|&nbspDaniel&nbspPetrik</p> 
+        </div>
+    </div>
+    <script>
+var app = new Vue({
+    el: '#aplikacija',
+    created: function () {
+        axios.get('app/kategorije').then(function (result) {
+            app.kategorije = result.data;
+        });
+        axios.post('app/login/kupac').then(function (result) {
+            app.kupac = result.data;
+        }).then(function () {
+            axios.post('app/korpa/prikazi').then(function (result) {
+                app.korpa = result.data;
+          });
+        })
+    },
+    computed:{
+              total:function(){
+                  var tmp_total = 0;
+                  app.korpa.forEach(function(i){
+                      tmp_total += i.cena;
+                  });
+                      
+                  
+                  return tmp_total;
+              }  
+            },
+    methods: {
+        racun: function(){
+            axios.post('app/racun/' + app.kupac.id).then(function (result){
+               app.racun = result.data; 
+            });
+        }
+        
+    },
+    data: {
+        kategorije: [],
+        kupac: [],
+        korpa: [],
+        racun: [],
+        stavka: []
+
+
+    }
+
+});
+    </script>
+</body>
+</html>
