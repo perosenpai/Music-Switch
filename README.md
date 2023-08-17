@@ -14,7 +14,7 @@ Every user who decides to purchase a product must register. Registration is done
 
 After registration, the user must log in to access the shopping cart and add desired items to it for making a purchase. To access the login, the user needs to click on 'Login' next to the 'Register' and 'Cart' fields. Clicking on login opens a new page where the user needs to enter the credentials - email and password used during registration. If the user fills in the email and password fields incorrectly, an 'error' message will be displayed. If the user successfully logs in, they are redirected to the homepage and can use the cart. If the user doesn't log in, they are not allowed to use the cart until they register. This website is accessible to everyone, but if a user wants to purchase one or more products, they must log in.
 
-![BUILD_FOLDER](src/assets/img/music_switch_1.png)
+![BUILD_FOLDER](assets/img/music_switch_1.png)
 ## Database model
 
 In the cart, a logged-in user can view the items they added by clicking the 'Add to Cart' button. The desired items are displayed on the page. If the user accidentally added an item or doesn't want to purchase a particular product, they can remove it from the cart by clicking the 'Delete' button. Once the user has finished selecting items, they proceed by clicking the 'Continue' button.
@@ -23,7 +23,7 @@ After clicking the button, a new page appears, showing the total price of all se
 
 After reviewing everything, the user proceeds by clicking the 'Complete Purchase' button. This opens a new page displaying the user's receipt. This page also shows the information entered during registration (First Name, Last Name, contact phone, address, city, state, postal code). The receipt includes user details (buyer), the selected items, the final price, and information about when to expect the desired items.
 
-![BUILD_FOLDER](src/assets/img/music_switch_4.png)
+![BUILD_FOLDER](assets/img/music_switch_3.png)
 
 In the main section of the website, on the left side, there's a selection of categories. Below that, you can find contact phone numbers, addresses, emails, and store working hours. On the right side of each page, the content is displayed based on the page you're on.
 
